@@ -11,6 +11,6 @@ nku 南开大学(Nankai University) eamis教务系统抢课脚本，包括定时
 >
 > 1. 实现登录，通过账号密码方式直接登录，省去复制cookie的过程
 > 2. 实现自动获取semesterid、profileId等字段，省去每学期不同科目的手动调节
-> 3. 优化lessonId2Counts过程，提高补退选抢课监控相应速度
+> 3. 优化lessonId2Counts过程，提高补退选抢课监控响应速度
 >
 > 当代码优化结束后将是此仓库再次private的时候，希望这几个月不要被查水表
