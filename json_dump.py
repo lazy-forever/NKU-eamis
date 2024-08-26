@@ -1,14 +1,15 @@
-import demjson
+import js2py
 
 # 从js代码中提取JSON
 def json_dump(js_code: str):
-    # 找到lessonJSONs的起始位置
-    start_index = js_code.find('=')
-    end_index = js_code.find(';')
-    # 截取lessonJSONs的部分
-    json_str = js_code[start_index+1:end_index]
-    # 尝试解析为JSON
-    lesson_jsons = demjson.decode(json_str)
+    # # 找到lessonJSONs的起始位置
+    # start_index = js_code.find('=')
+    # end_index = js_code.rfind(';')
+    # # 截取lessonJSONs的部分
+    # json_str = js_code[start_index+1:end_index]
+    # # 尝试解析为JSON
+    # lesson_jsons = demjson.decode(json_str)
+    lesson_jsons = js2py.eval_js(js_code)
     return lesson_jsons
 
 # 通过课程no获取课程id

@@ -1,2 +1,0 @@
-demjson==2.2.4
-Requests==2.31.0
