@@ -1,16 +1,63 @@
 # NKU-eamis
-nku 南开大学(Nankai University) eamis教务系统抢课脚本，包括定时抢课、补退选监控抢课
 
-> 2024.5.25
->
-> 把几个月前写的垃圾给公开了，相信我写的屎山别人肯定用不明白
->
-> 感觉性能还是太差了，等待下一次选课开放时重构
->
-> 接下来的优化目标大概是以下几点
->
-> 1. 实现登录，通过账号密码方式直接登录，省去复制cookie的过程
-> 2. 实现自动获取semesterid、profileId等字段，省去每学期不同科目的手动调节
-> 3. 优化lessonId2Counts过程，提高补退选抢课监控响应速度
->
-> 当代码优化结束后将是此仓库再次private的时候，希望这几个月不要被查水表
+nku 南开大学(Nankai University) eamis教务系统抢课脚本，包括定时抢课、补退选监控抢课、放课循环抢课，自带一键登录功能
+
+## 使用
+
+安装python依赖
+
+```bash
+pip install -r requirements.txt
+```
+
+修改自己的config.json
+
+运行程序
+
+```bash
+python main.py
+```
+
+## config填写说明
+
+共分为四大模块: system, user, helper, course
+
+**system**模块:
+
+mode: 选课模式, 0为定时抢课(用于预选或正选), 1为监控抢课(用于补退选), 2为循环抢课(用于正选放名额通常不会准时放名额的情况)
+
+help: 是否开启帮助模式
+
+sleep: 补退选的监控间隔时间, 单位为秒
+
+semesterId: 学期id, 通过选课网站->我的课表->切换到当前学期->查看cookie中的semester.id值
+
+**user**模块:
+
+username: 用户名
+
+password: 密码
+
+isEncrypted: 是否加密, 0为否, 1为是, 密码加密的程序位于login.py->eamis_account->encrypt函数中, 此字段目的在于不希望明文密码出现在配置文件中
+
+**helper**模块:
+
+是一个user的数组, 用于帮助主账号进行选课, 但是不会进行选课操作, 仅用于监控选课情况
+
+目前helper模块的功能尚未实现
+
+**course**模块:
+
+是一个lesson的数组, 用于配置选课信息
+
+lesson_no: 课程编号
+
+profileId: 课程所在profileId, 通过选课网站->选课->进入相应选课通道->查看选课url中的profileId值
+
+name: 课程名称, 仅仅是为了方便查看, 无实际作用
+
+## 未来计划
+
+1. 完善帮助模式
+
+2. 监控抢课模式下, 提供监听到选课信号时, 退出冲突课程再选目标课程, 如目标课程未成功选上, 重新选回冲突课程
