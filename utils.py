@@ -128,7 +128,9 @@ def time_choose_lesson(hour:int, minute:int, second:int):
 # 补退选监控抢课
 def monitor_choose_lesson():
     import threading
-    threading.Thread(target=update).start()
+    thread = threading.Thread(target=update)
+    thread.daemon = True  # 将线程设置为守护线程
+    thread.start()
     while 1:
         for i in lessons:
             if int(sc(i))<int(i.lc) and i.choose==False:
