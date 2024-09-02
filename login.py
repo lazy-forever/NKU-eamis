@@ -64,6 +64,7 @@ class eamis_account:
         self.cookies = eamis_cookies
         info_log("update verify cookies, username:"+self.username)
 
+        # 针对每个profileId进行预加载，原因：如果不进行预加载无法访问课程信息json
         requests.get('https://eamis.nankai.edu.cn/eams/stdElectCourse.action', cookies=self.cookies, verify=False)
         for i in self.profileId:
             requests.get('https://eamis.nankai.edu.cn/eams/stdElectCourse!defaultPage.action?electionProfile.id='+i, cookies=self.cookies, verify=False)

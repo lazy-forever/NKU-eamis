@@ -1,27 +1,17 @@
 {
     "system": {
         "mode": 2,
-        "help": false,
         "sleep": 1,
-        "semesterId": "4262"
+        "semesterId": "4262",
+        "hour": 0,
+        "minute": 0,
+        "second": 0
     },
     "user": {
         "username": "aaa",
         "password": "123456",
         "isEncrypted": false
     },
-    "helper": [
-        {
-            "username": "root",
-            "password": "123456",
-            "isEncrypted": false
-        },
-        {
-            "username": "admin",
-            "password": "795ca10dec2207075b09655bf69a0c9f",
-            "isEncrypted": true
-        }
-    ],
     "course": [
         {
             "lesson_no": "0915",

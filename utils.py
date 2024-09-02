@@ -20,9 +20,10 @@ username = config.config["user"]["username"]
 password = config.config["user"]["password"]
 is_password_encrypted = config.config["user"]["isEncrypted"]
 account = eamis_account(username, password, is_password_encrypted, profileIds)
-account.verify()
-info_log("cookies loaded success, JSESSIONID:"+account.cookies.get("JSESSIONID")+", srv_id:"+account.cookies.get("srv_id"))
-
+if account.verify():
+    info_log("cookies loaded success, JSESSIONID:"+account.cookies.get("JSESSIONID")+", srv_id:"+account.cookies.get("srv_id"))
+else:
+    exit(0)
 
 # 选课人数刷新地址
 lesson_count_url = "https://eamis.nankai.edu.cn/eams/stdElectCourse!queryStdCount.action?projectId=1&semesterId="+config.config["system"]["semesterId"]

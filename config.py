@@ -2,12 +2,35 @@ import json
 from mylog import *
 
 config={}
-with open("config.json", "r") as f:
-    try:
-        config = json.load(f)
-    except:
-        error_log("config error")
-        exit(0)
+try:
+    with open("config.json", "r") as f:
+        try:
+            config = json.load(f)
+        except:
+            error_log("config error")
+            exit(0)
+except:
+    error_log("can't find config file, here is a example")
+    print('''{
+    "system": {
+        "mode": 2,
+        "sleep": 1,
+        "semesterId": "4262"
+    },
+    "user": {
+        "username": "aaa",
+        "password": "123456",
+        "isEncrypted": false
+    },
+    "course": [
+        {
+            "lesson_no": "0915",
+            "profileId": "1631",
+            "name": ""
+        }
+    ]
+}''')
+    exit(0)
 
 if "user" in config and "username" in config["user"] and "password" in config["user"]:
     info_log("config loaded, username:"+config["user"]["username"])
