@@ -1,4 +1,4 @@
 colorama==0.4.6
 Js2Py==0.74
-pycryptodome==3.15.0
+pycryptodome==3.21.0
 Requests==2.32.3
