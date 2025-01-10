@@ -1,7 +1,7 @@
 import config
 from mylog import *
 from login import eamis_account
-import requests
+from mynetwork import *
 import json_dump
 from lesson_json import parse_json
 from lesson import lesson
@@ -27,7 +27,7 @@ else:
 
 # 选课人数刷新地址
 lesson_count_url = "https://eamis.nankai.edu.cn/eams/stdElectCourse!queryStdCount.action?projectId=1&semesterId="+config.config["system"]["semesterId"]
-lesson_count = requests.get(lesson_count_url, cookies=account.cookies, verify=False).text
+lesson_count = requests_get(lesson_count_url, cookies=account.cookies, verify=False).text
 lesson_count = parse_json(lesson_count)
 info_log("lesson count data loaded success")
 
@@ -36,7 +36,7 @@ info_log("lesson count data loaded success")
 lessonJSONs = {}
 for i in profileIds:
     lessonJSONs_url = "https://eamis.nankai.edu.cn/eams/stdElectCourse!data.action?profileId="+i
-    lessonJSONs[i] = requests.get(lessonJSONs_url, cookies=account.cookies, verify=False).text
+    lessonJSONs[i] = requests_get(lessonJSONs_url, cookies=account.cookies, verify=False).text
     lessonJSONs[i] = json_dump.json_dump(lessonJSONs[i])
 
 # 待选课程信息
@@ -57,7 +57,7 @@ sleep_time = config.config["system"]["sleep"]
 def update():
     global lesson_count
     while flag:
-        response = requests.get(lesson_count_url, cookies=account.cookies, verify=False, allow_redirects=False)
+        response = requests_get(lesson_count_url, cookies=account.cookies, verify=False, allow_redirects=False)
         if response.status_code == 200:
             try:
                 lesson_count = parse_json(response.text)
@@ -88,7 +88,7 @@ def choose(lesson0:lesson):
         "lesson0":str(lesson0.id),
         "expLessonGroup_"+str(lesson0.id):lesson0.group==None and "undefined" or lesson0.group,
     }
-    response = requests.post(lesson0.choose_url, cookies=account.cookies, data=choose_data, verify=False)
+    response = requests_post(lesson0.choose_url, cookies=account.cookies, data=choose_data, verify=False)
     if "成功" in response.text:
         if "即将跳转至密码修改页面，请按要求修改密码。" in response.text:
             error_log("Cookie outdate")

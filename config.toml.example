@@ -1,0 +1,55 @@
+[system]
+mode = 1 # 0: 定时抢课模式 1: 监控抢课模式 2: 循环抢课模式
+sleep = 1 # 休眠时间
+semesterId = "4324" # 学期ID
+hour = 0 # 抢课时间 时
+minute = 0 # 抢课时间 分
+second = 0 # 抢课时间 秒
+debug = false # 是否开启调试模式
+webvpn = false # 是否开启webvpn模式
+
+[user]
+username = "111" #学号
+password = "ed1c3b662478e45f85088d3d8598d9b3"
+isEncrypted = true
+# isEncrypted = false 表示密码未加密 isEncrypted = true 表示密码已加密
+# 密码未加密则为明文密码，密码已加密则为加密后的密码
+# 加密后的函数为login.py 中的 eamis_account 类的 encrypt 函数
+# from Crypto.Cipher import AES
+# from Crypto.Util.Padding import pad
+# def encrypt(password):
+#     key = "8bfa9ad090fbbf87e518f1ce24a93eee".encode('utf-8')
+#     iv = "fbfae671950f423b58d49b91ff6a22b9".encode('utf-8')
+#     cipher = AES.new(key, AES.MODE_CBC, iv[:16])
+#     encrypted_hex = cipher.encrypt(pad(password.encode('utf-8'), AES.block_size)).hex()
+#     return encrypted_hex
+#
+# encrypt('password')
+# 例如密码为 password
+# >>> from Crypto.Cipher import AES
+# >>> from Crypto.Util.Padding import pad
+# >>> def encrypt(password):
+# ...     key = "8bfa9ad090fbbf87e518f1ce24a93eee".encode('utf-8')
+# ...     iv = "fbfae671950f423b58d49b91ff6a22b9".encode('utf-8')
+# ...     cipher = AES.new(key, AES.MODE_CBC, iv[:16])
+# ...     encrypted_hex = cipher.encrypt(pad(password.encode('utf-8'), AES.block_size)).hex()
+# ...     return encrypted_hex
+# ... 
+# >>> encrypt('password')
+# 'ed1c3b662478e45f85088d3d8598d9b3'
+# 之后将加密后的密码填入此处
+# password = "ed1c3b662478e45f85088d3d8598d9b3"
+# isEncrypted = true
+# 否则填入明文密码
+# password = "password"
+# isEncrypted = false
+
+[[course]]
+lesson_no = "1083"
+profileId = "1690"
+name = ""
+
+[[course]]
+lesson_no = "1055"
+profileId = "1690"
+name = ""

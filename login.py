@@ -1,6 +1,6 @@
 from Crypto.Cipher import AES
 from Crypto.Util.Padding import pad
-import requests
+from mynetwork import *
 import json
 import warnings
 warnings.filterwarnings("ignore")
@@ -33,41 +33,41 @@ class eamis_account:
             error_log("verify "+self.username+" failed:wrong password")
             return False
         url = 'https://eamis.nankai.edu.cn/'
-        responce = requests.get(url, verify=False)
+        responce = requests_get(url, verify=False)
         eamis_cookies = responce.cookies
 
         url = 'https://eamis.nankai.edu.cn/eams/home.action'
-        responce = requests.get(url, cookies=eamis_cookies, verify=False, allow_redirects=False)
+        responce = requests_get(url, cookies=eamis_cookies, verify=False, allow_redirects=False)
         eamis_cookies.update(responce.cookies)
         # eamis_cookies.set('semester.id', "4262", domain='eamis.nankai.edu.cn')
 
         url = 'https://eamis.nankai.edu.cn' + responce.headers.get('Location')
-        responce = requests.get(url, cookies=eamis_cookies, verify=False, allow_redirects=False)
+        responce = requests_get(url, cookies=eamis_cookies, verify=False, allow_redirects=False)
 
         url = responce.headers.get('Location')
-        responce = requests.get(url, verify=False, allow_redirects=False)
+        responce = requests_get(url, verify=False, allow_redirects=False)
         iam_cookies = responce.cookies
 
         url = 'https://iam.nankai.edu.cn/api/v1/login?os=web'
         data = {"login_scene":"feilian","account_type":"userid","account":self.username,"password":self.password}
-        response = requests.post(url, json=data, verify=False, cookies=iam_cookies)
+        response = requests_post(url, json=data, verify=False, cookies=iam_cookies)
         iam_cookies.update(response.cookies)
         try:
             url = 'https://iam.nankai.edu.cn' + response.json().get('data').get('next').get('link')
         except:
             error_log("verify " + self.username + " failed:"+response.json()["message"])
             return False
-        response = requests.get(url, verify=False, cookies=iam_cookies, allow_redirects=False)
+        response = requests_get(url, verify=False, cookies=iam_cookies, allow_redirects=False)
 
         url = response.headers.get('Location')
-        response = requests.get(url, verify=False, allow_redirects=True, cookies=eamis_cookies)
+        response = requests_get(url, verify=False, allow_redirects=True, cookies=eamis_cookies)
         self.cookies = eamis_cookies
         info_log("update verify cookies, username:"+self.username)
 
         # 针对每个profileId进行预加载，原因：如果不进行预加载无法访问课程信息json
-        requests.get('https://eamis.nankai.edu.cn/eams/stdElectCourse.action', cookies=self.cookies, verify=False)
+        requests_get('https://eamis.nankai.edu.cn/eams/stdElectCourse.action', cookies=self.cookies, verify=False)
         for i in self.profileId:
-            requests.get('https://eamis.nankai.edu.cn/eams/stdElectCourse!defaultPage.action?electionProfile.id='+i, cookies=self.cookies, verify=False)
+            requests_get('https://eamis.nankai.edu.cn/eams/stdElectCourse!defaultPage.action?electionProfile.id='+i, cookies=self.cookies, verify=False)
         return True
     def test_login(self):
         loginurl = "https://iam.nankai.edu.cn/api/v1/login?os=web"
@@ -76,7 +76,7 @@ class eamis_account:
         }
         data = {"login_scene":"feilian","account_type":"userid","account":self.username,"password":self.password}
         try:
-            response = requests.post(loginurl, headers=headers, data=json.dumps(data))
+            response = requests_post(loginurl, headers=headers, data=json.dumps(data))
         except Exception as e:
             error_log("network error:"+str(e))
             return None
