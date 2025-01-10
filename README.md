@@ -36,7 +36,7 @@ nku 南开大学(Nankai University) eamis教务系统抢课脚本，包括定时
 pip install -r requirements.txt
 ```
 
-修改自己的config.json
+复制`config.toml.example`到`config.toml`并修改为自己的`config.toml`文件
 
 运行程序
 
