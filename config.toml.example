@@ -6,7 +6,7 @@ hour = 0 # 抢课时间 时
 minute = 0 # 抢课时间 分
 second = 0 # 抢课时间 秒
 debug = false # 是否开启调试模式
-webvpn = false # 是否开启webvpn模式
+webvpn = false # 是否开启webvpn模式，暂时未实现
 
 [user]
 username = "111" #学号
@@ -46,10 +46,8 @@ isEncrypted = true
 
 [[course]]
 lesson_no = "1083"
-profileId = "1690"
-name = ""
+profileId = "1690" # 选课通道profileId, 通过选课网站->选课->进入相应选课通道->查看选课url中的profileId值
 
 [[course]]
 lesson_no = "1055"
 profileId = "1690"
-name = ""

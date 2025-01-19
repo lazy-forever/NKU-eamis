@@ -26,9 +26,13 @@ nku 南开大学(Nankai University) eamis教务系统抢课脚本，包括定时
 :heavy_multiplication_x: 保证一定可以抢到课程\
 :heavy_multiplication_x: 违背选课规则
 
-:warning: 本脚本仅供学习交流使用，不得用于任何商业用途，由此产生的一切后果与作者无关
+:warning: 本脚本仅供学习交流使用，不得用于任何商业用途，由此产生的一切后果与作者无关，严禁用于任何违法行为。
+
+:warning: 本脚本仅用于测试，**禁止将此脚本用于真实抢课行为，所产生的一切后果由使用者自行承担，与作者本人无任何关系。**
 
 ## 使用
+
+使用前请确保已经安装python3和pip
 
 安装python依赖
 
@@ -38,38 +42,20 @@ pip install -r requirements.txt
 
 复制`config.toml.example`到`config.toml`并修改为自己的`config.toml`文件
 
+```bash
+cp config.toml.example config.toml
+```
+
 运行程序
 
 ```bash
 python main.py
 ```
 
-## config填写说明
+## 贡献与支持
 
-共分为三大模块: system, user, course
+如果你有任何问题或者建议，欢迎提交issue或者pull request
 
-**system**模块:
+如果你觉得这个项目对你有帮助，欢迎给我一个star，并推荐给你的朋友，也可以通过我的主页请我喝杯咖啡
 
-mode: 选课模式, 0为定时抢课(用于预选或正选), 1为监控抢课(用于补退选), 2为循环抢课(用于正选放名额通常不会准时放名额的情况)
-
-sleep: 补退选的监控间隔时间, 单位为秒
-
-semesterId: 学期id, 通过选课网站->我的课表->切换到当前学期->查看cookie中的semester.id值
-
-**user**模块:
-
-username: 用户名
-
-password: 密码
-
-isEncrypted: 是否加密, 0为否, 1为是, 密码加密的程序位于login.py->eamis_account->encrypt函数中, 此字段目的在于不希望明文密码出现在配置文件中
-
-**course**模块:
-
-是一个lesson的数组, 用于配置选课信息
-
-lesson_no: 课程编号
-
-profileId: 课程所在profileId, 通过选课网站->选课->进入相应选课通道->查看选课url中的profileId值
-
-name: 课程名称, 仅仅是为了方便查看, 无实际作用
+感谢所有为这个项目提交代码的人
