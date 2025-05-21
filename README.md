@@ -5,6 +5,8 @@
 
 nku 南开大学(Nankai University) eamis教务系统抢课脚本，包括定时抢课、补退选监控抢课、放课循环抢课，自带一键登录功能
 
+配置使用教程见[wiki](https://github.com/lazy-forever/NKU-eamis/wiki)
+
 ## 特性
 
 :heavy_check_mark: 自动化登录\
