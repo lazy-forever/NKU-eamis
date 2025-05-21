@@ -1,5 +1,5 @@
 # NKU-eamis
-![Version](https://img.shields.io/badge/Version-5.0.1-blue.svg) ![Language](https://img.shields.io/badge/Language-Python3-red.svg) ![License](https://img.shields.io/badge/License-AGPL--3.0-yellow.svg)
+![Version](https://img.shields.io/badge/Version-5.1.0-blue.svg) ![Language](https://img.shields.io/badge/Language-Python3-red.svg) ![License](https://img.shields.io/badge/License-AGPL--3.0-yellow.svg)
 
 ## 介绍
 
@@ -59,3 +59,5 @@ python main.py
 如果你觉得这个项目对你有帮助，欢迎给我一个star，并推荐给你的朋友，也可以通过我的主页请我喝杯咖啡
 
 感谢所有为这个项目提交代码的人
+
+> 于2025年5月22日灰度开源
